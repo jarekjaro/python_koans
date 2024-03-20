@@ -12,7 +12,7 @@ def my_global_function(a,b):
 
 class AboutMethods(Koan):
     def test_calling_a_global_function(self):
-        self.assertEqual(__, my_global_function(2,3))
+        self.assertEqual(5, my_global_function(2, 3))
 
     # NOTE: Wrong number of arguments is not a SYNTAX error, but a
     # runtime error.
@@ -33,7 +33,7 @@ class AboutMethods(Koan):
             msg = e.args[0]
 
         # Note, watch out for parenthesis. They need slashes in front!
-        self.assertRegex(msg, __)
+        self.assertRegex(msg, "my_global_function\(\) takes 2 positional arguments but 3 were given")
 
     # ------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ class AboutMethods(Koan):
         sum = a + b
 
     def test_which_does_not_return_anything(self):
-        self.assertEqual(__, self.pointless_method(1, 2))
+        self.assertEqual(None, self.pointless_method(1, 2))
         # Notice that methods accessed from class scope do not require
         # you to pass the first "self" argument?
 
@@ -51,8 +51,8 @@ class AboutMethods(Koan):
         return [a, b]
 
     def test_calling_with_default_values(self):
-        self.assertEqual(__, self.method_with_defaults(1))
-        self.assertEqual(__, self.method_with_defaults(1, 2))
+        self.assertEqual([1,'default_value'], self.method_with_defaults(1))
+        self.assertEqual([1,2], self.method_with_defaults(1, 2))
 
     # ------------------------------------------------------------------
 
@@ -73,13 +73,13 @@ class AboutMethods(Koan):
         def function_with_the_same_name(a, b):
             return a * b
 
-        self.assertEqual(__, function_with_the_same_name(3,4))
+        self.assertEqual(__, function_with_the_same_name(3, 4))
 
     def test_calling_methods_in_same_class_with_explicit_receiver(self):
         def function_with_the_same_name(a, b):
             return a * b
 
-        self.assertEqual(__, self.function_with_the_same_name(3,4))
+        self.assertEqual(__, self.function_with_the_same_name(3, 4))
 
     # ------------------------------------------------------------------
 
@@ -114,7 +114,8 @@ class AboutMethods(Koan):
 
     # ------------------------------------------------------------------
 
-    def one_line_method(self): return 'Madagascar'
+    def one_line_method(self):
+        return 'Madagascar'
 
     def test_no_indentation_required_for_one_line_statement_bodies(self):
         self.assertEqual(__, self.one_line_method())
@@ -139,7 +140,7 @@ class AboutMethods(Koan):
             return "wagging"
 
         def __password(self):
-            return 'password' # Genius!
+            return 'password'  # Genius!
 
     def test_calling_methods_in_other_objects(self):
         rover = self.Dog()
